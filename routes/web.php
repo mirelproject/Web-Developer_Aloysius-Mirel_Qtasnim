@@ -1,10 +1,11 @@
 <?php
 
 use Illuminate\Support\Facades\Route;
-
 use App\Http\Controllers\ItemController;
 use App\Http\Controllers\ItemTypeController;
 use App\Http\Controllers\SaleController;
+
+Route::redirect('/', '/items');
 
 Route::resource('items', ItemController::class);
 Route::resource('item-types', ItemTypeController::class);
