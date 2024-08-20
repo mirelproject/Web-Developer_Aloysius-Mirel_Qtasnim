@@ -9,10 +9,10 @@ class CreateItemsTable extends Migration
     public function up()
     {
         Schema::create('items', function (Blueprint $table) {
-            $table->id();
+            $table->id(); // BIGINT UNSIGNED
             $table->string('name');
             $table->integer('stock');
-            $table->foreignId('type_id')->constrained('item_types');
+            $table->foreignId('type_id')->constrained('item_types')->onDelete('cascade');
             $table->timestamps();
         });
     }
@@ -22,3 +22,4 @@ class CreateItemsTable extends Migration
         Schema::dropIfExists('items');
     }
 }
+

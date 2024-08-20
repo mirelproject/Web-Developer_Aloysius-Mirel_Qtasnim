@@ -10,14 +10,21 @@ class ItemController extends Controller
 {
     public function index(Request $request)
     {
-        $items = Item::with('type')
-            ->when($request->has('search'), function ($query) use ($request) {
-                $query->where('name', 'like', "%{$request->search}%");
-            })
-            ->when($request->has('sort_by'), function ($query) use ($request) {
-                $query->orderBy($request->sort_by, $request->get('sort_direction', 'asc'));
-            })
-            ->paginate(10);
+        $query = Item::with('type');
+
+        if ($request->filled('start_date') && $request->filled('end_date')) {
+            $query->whereBetween('created_at', [$request->start_date, $request->end_date]);
+        }
+
+        if ($request->has('search')) {
+            $query->where('name', 'like', "%{$request->search}%");
+        }
+
+        if ($request->has('sort_by')) {
+            $query->orderBy($request->sort_by, $request->get('sort_direction', 'asc'));
+        }
+
+        $items = $query->paginate(10);
 
         return view('items.index', compact('items'));
     }

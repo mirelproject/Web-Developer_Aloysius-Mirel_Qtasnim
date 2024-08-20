@@ -3,6 +3,24 @@
 @section('content')
 <div class="container">
     <h1>Items List</h1>
+
+    <!-- Filter Form -->
+    <form method="GET" action="{{ route('items.index') }}" class="mb-4">
+        <div class="row">
+            <div class="col-md-3">
+                <label for="start_date" class="form-label">Start Date</label>
+                <input type="date" name="start_date" id="start_date" class="form-control" value="{{ request('start_date') }}">
+            </div>
+            <div class="col-md-3">
+                <label for="end_date" class="form-label">End Date</label>
+                <input type="date" name="end_date" id="end_date" class="form-control" value="{{ request('end_date') }}">
+            </div>
+            <div class="col-md-3 align-self-end">
+                <button type="submit" class="btn btn-primary">Filter</button>
+            </div>
+        </div>
+    </form>
+
     <table class="table">
         <thead>
             <tr>
