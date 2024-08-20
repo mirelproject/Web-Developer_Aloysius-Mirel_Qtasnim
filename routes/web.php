@@ -13,3 +13,4 @@ Route::resource('sales', SaleController::class);
 Route::get('/api/items', [ItemController::class, 'index']);
 Route::get('/api/sales', [SaleController::class, 'index']);
 
+Route::get('/items/compare', [ItemController::class, 'compare'])->name('items.compare');
